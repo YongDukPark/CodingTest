@@ -23,7 +23,7 @@ public class QN11718_그대로_출력하기 {
             }
             // \n을 1개로 인식함
             sb.deleteCharAt(sb.length() - 1);
-
+ 
             bw.write(sb.toString());
             bw.flush();
         } catch(IOException ex){
