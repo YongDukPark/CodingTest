@@ -1,21 +1,17 @@
 package baekjoon.step6;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-public class QN2941_크로아티아_알파벳{
+public class QN2941_크로아티아_알파벳2 {
     public static void main(String[] args){
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         HashMap<Integer, String> hash = new HashMap<Integer, String>();
-        Set<Character> set = new HashSet<>();
+        Set<String> set = new HashSet<>();
         hash.put(0, "c=");
         hash.put(1, "c-");
         hash.put(2, "dz=");
@@ -40,18 +36,23 @@ public class QN2941_크로아티아_알파벳{
                     if(text.indexOf(hash.get(i)) != text.lastIndexOf(hash.get(i))){
                         for(int j = 0 ; j < text.length() ; j++){ // j가 5일때 문제 발생
                             if(text.substring(j , j + hash.get(i).length() - 1).equals(hash.get(i))){
-                            //if(text.substring(j , j + 2).equals(hash.get(i))){
-                                //크로아티아 알파벳 길이만큼 뺄 단어수를 계산
-                                mnum = mnum + (hash.get(i).length() - 1);
+                                count = count + 1;
                             }
-
                         }
+                        text = text.replaceAll(hash.get(i), "");
                     } else {    //
-                        mnum = mnum + (hash.get(i).length() - 1);
+                        text = text.replaceAll(hash.get(i), "");
+                        count = count + 1;
                     }
                 }
             }
-            bw.write("count : " + String.valueOf(text.length() - mnum));
+            String[] textarr = text.split("");
+
+            for(int i = 0 ; i < textarr.length ; i++){
+                set.add(textarr[i]);
+            }
+
+            bw.write("count : " + String.valueOf(set.size() + count));
             bw.flush();
         } catch(IOException ex){
             System.err.println(ex);
